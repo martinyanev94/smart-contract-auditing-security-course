@@ -1,0 +1,3 @@
+function getFundraiserCount() public view returns (uint) {
+    return fundraisers.length;
+}
