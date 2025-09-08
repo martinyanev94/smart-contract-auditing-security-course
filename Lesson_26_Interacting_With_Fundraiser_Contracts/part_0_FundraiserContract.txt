@@ -1,0 +1,25 @@
+pragma solidity ^0.8.0;
+
+contract Fundraiser {
+    struct FundraiserData {
+        string title;
+        address creator;
+        uint256 totalRaised;
+        uint256 goal;
+    }
+
+    FundraiserData[] public fundraisers;
+    
+    function createFundraiser(string memory title, uint256 goal) public {
+        fundraisers.push(FundraiserData({
+            title: title,
+            creator: msg.sender,
+            totalRaised: 0,
+            goal: goal
+        }));
+    }
+
+    function getFundraisers() public view returns (FundraiserData[] memory) {
+        return fundraisers;
+    }
+}
