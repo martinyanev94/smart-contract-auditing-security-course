@@ -1,0 +1,28 @@
+pragma solidity ^0.8.0;
+
+contract ProfileWallet {
+    struct UserProfile {
+        string name;
+        uint256 balance;
+    }
+
+    mapping(address => UserProfile) public profiles;
+    mapping(address => uint256) public balances;
+
+    event ProfileCreated(address indexed user, string name);
+    
+    function createProfile(string memory name) public {
+        profiles[msg.sender] = UserProfile(name, 0);
+        emit ProfileCreated(msg.sender, name);
+    }
+
+    function deposit() public payable {
+        require(msg.value > 0, "Must send some ether");
+        balances[msg.sender] += msg.value;
+        profiles[msg.sender].balance += msg.value;
+    }
+
+    function getProfile() public view returns (string memory, uint256) {
+        return (profiles[msg.sender].name, profiles[msg.sender].balance);
+    }
+}
