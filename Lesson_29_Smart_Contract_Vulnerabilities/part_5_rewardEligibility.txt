@@ -1,0 +1,3 @@
+function eligibleForReward() public view returns (bool) {
+    return (block.timestamp % 15 seconds) == 0; // Adds a level of tolerance to the logic
+}
