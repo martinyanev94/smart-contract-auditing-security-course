@@ -1,0 +1,10 @@
+function withdrawFunds() external {
+    uint256 withdrawAmount = balances[msg.sender];
+    require(msg.sender.call{value: withdrawAmount}());
+    balances[msg.sender] = 0; // State update happens after the transfer
+}
+function withdrawFunds() external {
+    uint256 withdrawAmount = balances[msg.sender];
+    balances[msg.sender] = 0; // Update the state first
+    require(msg.sender.call{value: withdrawAmount}());
+}
