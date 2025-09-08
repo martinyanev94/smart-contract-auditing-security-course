@@ -1,0 +1,11 @@
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MyContract is Ownable {
+    uint256 public data;
+
+    function setData(uint256 _data) public onlyOwner {
+        data = _data;
+    }
+}
