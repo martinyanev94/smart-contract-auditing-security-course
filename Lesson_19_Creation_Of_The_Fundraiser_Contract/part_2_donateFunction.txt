@@ -1,0 +1,6 @@
+function donate() public payable {
+    require(msg.value > 0, "Donation must be more than zero");
+    donations[msg.sender] += msg.value;
+    totalDonations += msg.value;
+    emit DonationReceived(msg.sender, msg.value);
+}
