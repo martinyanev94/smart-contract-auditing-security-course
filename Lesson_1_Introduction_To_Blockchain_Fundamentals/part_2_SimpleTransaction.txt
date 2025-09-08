@@ -1,0 +1,9 @@
+pragma solidity ^0.4.25;
+
+contract SimpleTransaction {
+    event Transfer(address indexed from, address indexed to, uint256 value);
+
+    function sendTransaction(address _to, uint256 _value) public {
+        emit Transfer(msg.sender, _to, _value);
+    }
+}
