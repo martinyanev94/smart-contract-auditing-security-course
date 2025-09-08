@@ -1,0 +1,5 @@
+function donate() public payable {
+    require(msg.value > 0, "Donation must be more than 0");
+    donationsHistory[msg.sender].push(Donation(msg.value, block.timestamp));
+    emit DonationReceived(msg.sender, msg.value);
+}
