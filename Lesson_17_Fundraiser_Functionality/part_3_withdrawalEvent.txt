@@ -1,0 +1,2 @@
+event Withdrawal(address indexed to, uint256 amount);
+emit Withdrawal(beneficiary, address(this).balance);
