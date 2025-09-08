@@ -1,0 +1,28 @@
+pragma solidity >=0.5.0 <0.8.0;
+
+contract Fundraiser {
+    address payable public beneficiary;
+    uint public totalDonations;
+    mapping(address => uint) public donations;
+    
+    event DonationReceived(address indexed donor, uint amount);
+    event Withdraw(address indexed beneficiary, uint amount);
+    
+    constructor(address payable _beneficiary) public {
+        beneficiary = _beneficiary;
+    }
+    
+    function donate() public payable {
+        require(msg.value > 0, "Donation must be more than zero");
+        donations[msg.sender] += msg.value;
+        totalDonations += msg.value;
+        emit DonationReceived(msg.sender, msg.value);
+    }
+    
+    function withdraw() public {
+        require(msg.sender == beneficiary, "Only beneficiary can withdraw");
+        uint amount = address(this).balance;
+        beneficiary.transfer(amount);
+        emit Withdraw(beneficiary, amount);
+    }
+}
