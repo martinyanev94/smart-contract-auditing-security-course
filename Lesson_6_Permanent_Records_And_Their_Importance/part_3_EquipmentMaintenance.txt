@@ -1,0 +1,38 @@
+pragma solidity ^0.8.0;
+
+contract EquipmentMaintenance {
+    struct MaintenanceRecord {
+        uint256 id;
+        string description;
+        uint256 date;
+        uint256 equipmentId;
+    }
+
+    struct Equipment {
+        string name;
+        MaintenanceRecord[] maintenanceLogs;
+    }
+
+    mapping(uint256 => Equipment) public equipment;
+
+    function registerEquipment(uint256 _equipmentId, string memory _name) public {
+        equipment[_equipmentId] = Equipment({ 
+            name: _name, 
+            maintenanceLogs: new MaintenanceRecord[](0) 
+        });
+    }
+
+    function addMaintenanceRecord(uint256 _equipmentId, string memory _description) public {
+        MaintenanceRecord memory newRecord = MaintenanceRecord({
+            id: equipment[_equipmentId].maintenanceLogs.length,
+            description: _description,
+            date: block.timestamp,
+            equipmentId: _equipmentId
+        });
+        equipment[_equipmentId].maintenanceLogs.push(newRecord);
+    }
+
+    function getMaintenanceRecords(uint256 _equipmentId) public view returns (MaintenanceRecord[] memory) {
+        return equipment[_equipmentId].maintenanceLogs;
+    }
+}
