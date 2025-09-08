@@ -1,0 +1,24 @@
+pragma solidity ^0.8.0;
+
+contract AssetMaintenance {
+    struct MaintenanceRecord {
+        uint256 id;
+        string description;
+        uint256 date;
+    }
+
+    mapping(address => MaintenanceRecord[]) public maintenanceLogs;
+
+    function addMaintenanceRecord(string memory _description) public {
+        MaintenanceRecord memory newRecord = MaintenanceRecord({
+            id: maintenanceLogs[msg.sender].length,
+            description: _description,
+            date: block.timestamp
+        });
+        maintenanceLogs[msg.sender].push(newRecord);
+    }
+
+    function getMaintenanceRecords() public view returns (MaintenanceRecord[] memory) {
+        return maintenanceLogs[msg.sender];
+    }
+}
