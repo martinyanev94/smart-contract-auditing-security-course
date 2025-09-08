@@ -1,0 +1,5 @@
+function createFundraiser() public {
+    Fundraiser newFundraiser = new Fundraiser(msg.sender);
+    fundraisers.push(newFundraiser);
+    emit FundraiserCreated(address(newFundraiser));
+}
