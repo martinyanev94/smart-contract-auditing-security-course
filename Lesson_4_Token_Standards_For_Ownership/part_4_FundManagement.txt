@@ -1,0 +1,11 @@
+modifier hasEnoughFunds(uint256 _value) {
+    require(balanceOf[msg.sender] >= _value, "Insufficient balance");
+    _;
+}
+
+function transfer(address _to, uint256 _value) public hasEnoughFunds(_value) returns (bool success) {
+    balanceOf[msg.sender] -= _value;
+    balanceOf[_to] += _value;
+    emit Transfer(msg.sender, _to, _value);
+    return true;
+}
