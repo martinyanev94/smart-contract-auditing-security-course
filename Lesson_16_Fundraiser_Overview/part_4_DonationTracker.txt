@@ -1,0 +1,6 @@
+struct Donation {
+    uint256 amount;
+    uint256 time;
+}
+
+mapping(address => Donation[]) private donationsHistory;
