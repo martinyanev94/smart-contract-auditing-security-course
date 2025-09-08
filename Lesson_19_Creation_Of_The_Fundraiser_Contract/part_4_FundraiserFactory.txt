@@ -1,0 +1,15 @@
+pragma solidity >=0.5.0 <0.8.0;
+
+import "./Fundraiser.sol";
+
+contract FundraiserFactory {
+    Fundraiser[] public fundraisers;
+    
+    event FundraiserCreated(address indexed fundraiser);
+    
+    function createFundraiser() public {
+        Fundraiser newFundraiser = new Fundraiser(msg.sender);
+        fundraisers.push(newFundraiser);
+        emit FundraiserCreated(address(newFundraiser));
+    }
+}
