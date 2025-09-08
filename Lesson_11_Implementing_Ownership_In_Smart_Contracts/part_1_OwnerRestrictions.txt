@@ -1,0 +1,7 @@
+modifier onlyOwner() {
+    require(msg.sender == owner, "You are not the owner");
+    _;
+}
+function setGreeting(string memory _greeting) public onlyOwner {
+    greeting = _greeting;
+}
