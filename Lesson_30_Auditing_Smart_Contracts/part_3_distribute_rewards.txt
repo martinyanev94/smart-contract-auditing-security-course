@@ -1,0 +1,11 @@
+function distributeRewards(address[] memory recipients, uint256 amount) public {
+    for (uint i = 0; i < recipients.length; i++) {
+        payable(recipients[i]).transfer(amount);
+    }
+}
+function distributeRewards(address[] memory recipients, uint256 amount) public {
+    require(recipients.length <= 100, "Too many recipients");
+    for (uint i = 0; i < recipients.length; i++) {
+        payable(recipients[i]).transfer(amount);
+    }
+}
