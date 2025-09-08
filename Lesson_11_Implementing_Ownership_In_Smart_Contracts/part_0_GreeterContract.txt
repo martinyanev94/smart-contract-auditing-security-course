@@ -1,0 +1,11 @@
+pragma solidity ^0.8.0;
+
+contract Greeter {
+    string public greeting;
+    address public owner;
+
+    constructor(string memory _greeting) {
+        greeting = _greeting;
+        owner = msg.sender; // Set the contract deployer as the owner
+    }
+}
