@@ -1,0 +1,6 @@
+function withdraw() public {
+    require(msg.sender == beneficiary, "Only beneficiary can withdraw");
+    uint amount = address(this).balance;
+    beneficiary.transfer(amount);
+    emit Withdraw(beneficiary, amount);
+}
