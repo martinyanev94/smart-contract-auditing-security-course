@@ -1,0 +1,21 @@
+pragma solidity ^0.8.0;
+
+contract IoTCheckpointSupplyChain {
+    struct Product {
+        uint id;
+        string name;
+        string qualityData;
+        address owner;
+    }
+
+    mapping(uint => Product) public products;
+
+    function addProduct(uint _id, string memory _name) public {
+        products[_id] = Product(_id, _name, "", msg.sender);
+    }
+
+    function updateQualityData(uint _id, string memory _qualityData) public {
+        require(msg.sender == products[_id].owner, "Only the owner can update data");
+        products[_id].qualityData = _qualityData;
+    }
+}
