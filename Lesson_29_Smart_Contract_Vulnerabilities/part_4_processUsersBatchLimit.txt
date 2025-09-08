@@ -1,0 +1,6 @@
+function processUsers(uint256[] memory userIds) public {
+    require(userIds.length <= batchLimit, "Exceeded batch limit");
+    for (uint i = 0; i < userIds.length; i++) {
+        // Process each user
+    }
+}
