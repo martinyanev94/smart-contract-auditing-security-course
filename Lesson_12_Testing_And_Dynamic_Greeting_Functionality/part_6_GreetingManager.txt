@@ -1,0 +1,7 @@
+event GreetingSet(address indexed user, string greeting);
+
+function setGreeting(string memory _greeting) public {
+    require(bytes(_greeting).length > 0, "Greeting cannot be empty");
+    greetings[msg.sender] = _greeting;
+    emit GreetingSet(msg.sender, _greeting);
+}
