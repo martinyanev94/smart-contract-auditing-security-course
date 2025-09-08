@@ -1,0 +1,9 @@
+[network]
+chain = "goerli"
+rpc = true
+ws = true
+
+[rpc]
+port = 8545
+bind_ip = "127.0.0.1"
+cors = ["*"]
