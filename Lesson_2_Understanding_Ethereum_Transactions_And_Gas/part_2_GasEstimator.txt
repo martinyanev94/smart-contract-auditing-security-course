@@ -1,0 +1,13 @@
+pragma solidity ^0.8.0;
+
+contract GasEstimator {
+    function estimateGasForTransfer(address payable recipient) public payable {
+        uint256 gasPrice = tx.gasprice;
+        uint256 gasLimit = 21000; // Standard gas limit for transferring ether
+        uint256 totalCost = gasPrice * gasLimit;
+        
+        require(msg.value >= totalCost, "Not enough ether to cover gas");
+
+        recipient.transfer(msg.value);
+    }
+}
