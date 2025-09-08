@@ -1,0 +1,14 @@
+// SimpleToken.sol
+pragma solidity ^0.8.0;
+
+contract SimpleToken {
+    string public name = "SimpleToken";
+    string public symbol = "STK";
+    uint256 public totalSupply = 1000;
+    
+    mapping(address => uint256) public balanceOf;
+
+    constructor() {
+        balanceOf[msg.sender] = totalSupply;
+    }
+}
