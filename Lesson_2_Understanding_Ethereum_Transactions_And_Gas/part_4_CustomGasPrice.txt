@@ -1,0 +1,10 @@
+pragma solidity ^0.8.0;
+
+contract CustomGasPrice {
+    function executeTransaction(address payable recipient, uint256 amount) public {
+        require(amount > 0, "Must send some ether");
+
+        (bool success, ) = recipient.call{value: amount, gas: 50000}("");
+        require(success, "Transaction failed");
+    }
+}
