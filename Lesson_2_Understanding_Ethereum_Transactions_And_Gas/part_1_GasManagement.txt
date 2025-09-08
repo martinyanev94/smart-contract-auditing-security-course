@@ -1,0 +1,9 @@
+pragma solidity ^0.8.0;
+
+contract GasExample {
+    function sendEtherWithGas(address payable recipient) public payable {
+        require(msg.value > 0, "Send some ether");
+        require(gasleft() > 20000, "Not enough gas!");
+        recipient.transfer(msg.value);
+    }
+}
