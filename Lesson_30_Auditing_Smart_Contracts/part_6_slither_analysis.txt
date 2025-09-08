@@ -1,0 +1,2 @@
+pip install slither-analyzer
+slither MyContract.sol
