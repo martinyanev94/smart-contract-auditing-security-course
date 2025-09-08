@@ -1,0 +1,7 @@
+mapping(address => uint256) public bids;
+
+function placeBid(uint256 _bidAmount) public {
+    require(_bidAmount > currentHighestBid, "Bid not high enough");
+    // Logic to process the bid
+    bids[msg.sender] = _bidAmount;
+}
