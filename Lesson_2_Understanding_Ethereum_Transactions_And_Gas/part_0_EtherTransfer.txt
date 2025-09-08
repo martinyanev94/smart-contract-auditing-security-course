@@ -1,0 +1,8 @@
+pragma solidity ^0.8.0;
+
+contract EtherTransfer {
+    function sendEther(address payable recipient) public payable {
+        require(msg.value > 0, "Send some ether");
+        recipient.transfer(msg.value);
+    }
+}
