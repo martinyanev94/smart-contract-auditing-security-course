@@ -1,0 +1,4 @@
+function withdraw() public onlyOwner {
+    require(address(this).balance > 0, "No funds to withdraw");
+    beneficiary.transfer(address(this).balance);
+}
