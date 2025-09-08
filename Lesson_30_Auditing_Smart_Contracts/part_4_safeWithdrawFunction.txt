@@ -1,0 +1,5 @@
+function safeWithdraw(uint256 amount) public {
+    require(amount <= balances[msg.sender], "Withdraw amount exceeds balance");
+    balances[msg.sender] -= amount;
+    payable(msg.sender).transfer(amount);
+}
