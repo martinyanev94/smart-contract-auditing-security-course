@@ -1,0 +1,31 @@
+pragma solidity ^0.8.0;
+
+contract EventfulWallet {
+    mapping(address => uint256) public balances;
+    mapping(address => uint256) public lastWithdrawal;
+    uint256 public constant MAX_WITHDRAWAL_PERCENTAGE = 10;
+
+    event Deposited(address indexed user, uint256 amount);
+    event Withdrawn(address indexed user, uint256 amount);
+
+    function deposit() public payable {
+        require(msg.value > 0, "Must send some ether");
+        balances[msg.sender] += msg.value;
+        emit Deposited(msg.sender, msg.value);
+    }
+
+    function withdraw(uint256 amount) public {
+        require(balances[msg.sender] >= amount, "Insufficient funds");
+        require(canWithdraw(amount), "Withdrawal limit exceeded");
+        
+        balances[msg.sender] -= amount;
+        lastWithdrawal[msg.sender] = block.timestamp;
+        payable(msg.sender).transfer(amount);
+        emit Withdrawn(msg.sender, amount);
+    }
+
+    function canWithdraw(uint256 amount) internal view returns (bool) {
+        uint256 dailyLimit = (balances[msg.sender] * MAX_WITHDRAWAL_PERCENTAGE) / 100;
+        return amount <= dailyLimit;
+    }
+}
