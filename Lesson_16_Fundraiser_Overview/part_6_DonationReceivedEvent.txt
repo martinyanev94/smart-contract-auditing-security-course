@@ -1,0 +1,1 @@
+event DonationReceived(address indexed donor, uint256 amount);
