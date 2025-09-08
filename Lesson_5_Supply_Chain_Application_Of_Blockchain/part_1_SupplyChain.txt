@@ -1,0 +1,21 @@
+pragma solidity ^0.8.0;
+
+contract SupplyChain {
+    struct Product {
+        uint id;
+        string name;
+        string origin;
+        address owner;
+    }
+
+    mapping(uint => Product) public products;
+
+    function addProduct(uint _id, string memory _name, string memory _origin) public {
+        products[_id] = Product(_id, _name, _origin, msg.sender);
+    }
+
+    function transferOwnership(uint _id, address _newOwner) public {
+        require(msg.sender == products[_id].owner, "You are not the owner");
+        products[_id].owner = _newOwner;
+    }
+}
