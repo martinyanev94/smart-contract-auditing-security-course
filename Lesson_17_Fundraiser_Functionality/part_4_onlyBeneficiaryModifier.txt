@@ -1,0 +1,4 @@
+modifier onlyBeneficiary() {
+    require(msg.sender == beneficiary, "Caller is not the beneficiary");
+    _;
+}
